@@ -1,6 +1,6 @@
 <h1 align="center">Hi, I'm Matthew</h1>
 <h3 align="center">A passionate frontend developer from Montreal,Canada.</h3>
-
+https://matthewmacri.github.io/Portfolio-Website-Project/assets/1718231391870.jpg
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=matthewmacri&label=Profile%20views&color=0e75b6&style=flat" alt="matthewmacri" /> </p>
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=matthewmacri" alt="matthewmacri" /></a> </p>
