@@ -1,6 +1,6 @@
 <h1 align="center">Hi, I'm Matthew</h1>
 <h3 align="center">A passionate programmerfrom Montreal, Canada.</h3>
-<h3>               Currently studying Computer Science @ Vanier College</h3>
+<h3 align="center">Currently studying Computer Science @ Vanier College</h3>
 <p align="center">
   <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGNldGhvYXQyY3B6aHQ2a2V1N2tjM2sxcTE2bGR0cDAyMzl5d2I5OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/US6odsnLHQxTlqTEeF/giphy.webp" alt="Matthew's Picture" width="300" />
 </p>
