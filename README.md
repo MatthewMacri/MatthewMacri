@@ -1,7 +1,7 @@
 <h1 align="center">Hi, I'm Matthew</h1>
 <h3 align="center">A passionate frontend developer from Montreal,Canada.</h3>
 <p align="center">
-  <img src="https://matthewmacri.github.io/Portfolio-Website-Project/assets/1718231391870.jpg" alt="Matthew's Picture" width="300" />
+  <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGNldGhvYXQyY3B6aHQ2a2V1N2tjM2sxcTE2bGR0cDAyMzl5d2I5OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/US6odsnLHQxTlqTEeF/giphy.webp" alt="Matthew's Picture" width="300" />
 </p>
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=matthewmacri&label=Profile%20views&color=0e75b6&style=flat" alt="matthewmacri" /> </p>
 
