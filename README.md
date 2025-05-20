@@ -1,35 +1,79 @@
 <h1 align="center">👋 Hi, I'm Matthew Macri</h1>
-<h3 align="center">💻 Full Stack Developer | Computer Science Student | Montreal, Canada</h3>
+<h3 align="center">💻 Full Stack Developer | Computer Science Student | Based in Montreal, Canada</h3>
 
 <p align="center">
   <img src="https://media3.giphy.com/media/US6odsnLHQxTlqTEeF/giphy.webp" alt="Matthew Macri" width="280" />
 </p>
 
 <p align="center">
-  <a href="https://github.com/MatthewMacri"><img src="https://komarev.com/ghpvc/?username=matthewmacri&label=Profile%20views&color=0e75b6&style=flat-square" alt="Profile Views" /></a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/ryo-ma/github-profile-trophy">
-    <img src="https://github-profile-trophy.vercel.app/?username=matthewmacri&theme=gruvbox&no-frame=true&margin-w=10" alt="GitHub Trophies"/>
+  <a href="https://github.com/MatthewMacri">
+    <img src="https://komarev.com/ghpvc/?username=matthewmacri&label=Profile%20views&color=0e75b6&style=flat-square" alt="Profile Views" />
   </a>
 </p>
 
 ---
 
-### 👨‍💻 About Me
+## 👨‍💻 About Me
 
-- 🎓 **Currently Studying:** Computer Science @ Vanier College  
-- 🌐 **Building:** [Portfolio Website](https://github.com/MatthewMacri/Portfolio-Website-Project)  
-- 🌦️ **Collaborating On:** [Weather Web App](https://github.com/MatthewMacri/Internet-Programming-Project)  
-- 🛠️ **Learning:** React, Vue.js, GSAP, LINQ, i18n, and advanced DOM manipulation  
-- 💬 **Ask Me About:** Frontend dev, web frameworks, and multi-language support  
+- 🎓 **Education:** Computer Science student at Vanier College  
+- 🌐 **Portfolio:** [Portfolio Website](https://github.com/MatthewMacri/Portfolio-Website-Project)  
+- 🌦️ **Latest Project:** [Weather Web App](https://github.com/MatthewMacri/Internet-Programming-Project)  
+- 🚀 **Currently Exploring:** React, Vue.js, GSAP, LINQ, i18n, and advanced DOM APIs  
+- 💬 **Interests:** Frontend development, backend architecture, multi-language applications  
 - 🌍 **Languages:** English, French, Spanish, Italian  
-- ✨ **Fun Fact:** I’m passionate about merging design, interactivity, and performance in web apps.
+- ✨ **Fun Fact:** I love merging creative design with scalable, maintainable code
 
 ---
 
-### 🤝 Connect With Me
+## 🧰 Tech Stack
+
+<p align="center">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" title="Java" width="45"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" title="JavaScript" width="45"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" title="HTML5" width="45"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" title="CSS3" width="45"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" title="MySQL" width="45"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" title="C#" width="45"/>
+  <img src="https://www.vectorlogo.zone/logos/w3c/w3c-icon.svg" title="DOM API" width="45"/>
+</p>
+
+---
+
+## 📊 GitHub Stats
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=matthewmacri&show_icons=true&count_private=true&include_all_commits=true&theme=tokyonight&border_radius=15" width="47%" />
+  <img src="https://streak-stats.demolab.com?user=matthewmacri&theme=tokyonight&border_radius=15&fire=DD2727" width="47%" />
+</p>
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=matthewmacri&layout=donut&langs_count=6&theme=tokyonight&border_radius=15" width="47%" />
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=matthewmacri&theme=github-compact&area=true&hide_border=true" width="100%"/>
+</p>
+
+---
+
+## 🏆 GitHub Highlights
+
+<p align="center">
+  <a href="https://github.com/ryo-ma/github-profile-trophy">
+    <img src="https://github-profile-trophy.vercel.app/?username=matthewmacri&theme=tokyonight&no-frame=true&margin-w=10" alt="GitHub Trophies"/>
+  </a>
+</p>
+
+---
+
+## 🚀 Featured Projects
+
+- 🔗 [**Portfolio Website**](https://github.com/MatthewMacri/Portfolio-Website-Project)  
+  A responsive, personal site built with HTML, CSS, and JavaScript
+
+- 🌧️ [**Weather App**](https://github.com/MatthewMacri/Internet-Programming-Project)  
+  Displays real-time weather using public APIs and dynamic UI features
+
+---
+
+## 🤝 Connect With Me
 
 <p align="center">
   <a href="https://www.linkedin.com/in/m-macri/" target="_blank">
@@ -42,41 +86,6 @@
 
 ---
 
-### 🛠️ Tech Stack
+## 🎯 Final Note
 
-<p align="center">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" width="45"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" width="45"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" width="45"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" width="45"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" width="45"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C#" width="45"/>
-  <img src="https://www.vectorlogo.zone/logos/w3c/w3c-icon.svg" alt="DOM API" width="45"/>
-</p>
-
----
-
-### 📈 GitHub Insights
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=matthewmacri&show_icons=true&count_private=true&include_all_commits=true&theme=tokyonight&border_radius=15" width="47%" />
-  <img src="https://streak-stats.demolab.com?user=matthewmacri&theme=tokyonight&border_radius=15&fire=DD2727" width="47%" />
-</p>
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=matthewmacri&layout=donut&langs_count=6&theme=tokyonight&border_radius=15" width="47%" />
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=matthewmacri&theme=tokyonight&area=true&hide_border=true" width="100%"/>
-</p>
-
----
-
-### 🚀 Featured Projects
-
-- 🔗 [**Portfolio Website**](https://github.com/MatthewMacri/Portfolio-Website-Project): A modern, responsive portfolio built with HTML, CSS, and JS  
-- 🌧️ [**Weather App**](https://github.com/MatthewMacri/Internet-Programming-Project): Displays weather data using APIs and dynamic UI
-
----
-
-### 🎯 Final Note
-
-<p align="center"><i>"Building beautiful, functional code with a creative twist — follow me and let’s grow together!"</i></p>
+<p align="center"><i>"Striving to build scalable, user-focused software with clean code and creative vision."</i></p>
