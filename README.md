@@ -39,10 +39,6 @@
 
 ---
 
-## 📊 GitHub Stats
-
----
-
 ## 🏆 GitHub Highlights
 
 <p align="center">
