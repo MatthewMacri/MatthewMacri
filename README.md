@@ -41,16 +41,6 @@
 
 ## 📊 GitHub Stats
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=matthewmacri&show_icons=true&count_private=true&include_all_commits=true&theme=tokyonight&border_radius=15" width="47%" />
-  <img src="https://streak-stats.demolab.com?user=matthewmacri&theme=tokyonight&border_radius=15&fire=DD2727" width="47%" />
-</p>
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=matthewmacri&layout=donut&langs_count=6&theme=tokyonight&border_radius=15" width="47%" />
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=matthewmacri&theme=github-compact&area=true&hide_border=true" width="100%"/>
-</p>
-
 ---
 
 ## 🏆 GitHub Highlights
