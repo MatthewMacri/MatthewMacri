@@ -3,7 +3,7 @@
 <h1 align="center">Hi, I'm Matthew Macri 👋</h1>
 
 <p align="center">
-  <b>Computer Science student at Vanier College · Full-Stack Developer at Tokidos</b><br>
+  <b>Computer Engineering student at Concordia University · Full-Stack Developer at Tokidos</b><br>
   I build web apps, mobile apps, and automation tools — and I like shipping things that actually get used.
 </p>
 
@@ -17,7 +17,7 @@
 
 ## 🧑‍💻 About Me
 
-- 🎓 Pursuing a **DEC in Computer Science Technology** at Vanier College — Dean's List three times
+- 🎓 Studying **Computer Engineering** at **Concordia University** — following my Computer Science studies at Vanier College (Dean's List ×3)
 - 💼 **Full-stack developer at Tokidos**, building internal tools for customer support and operations
 - 🛠️ I work across the stack: web front-ends, Flask/PHP back-ends, Flutter mobile apps, and Python automation
 - 🏆 Hackathons: VanierHacks 2025 (honourable mention), McGill Physics Hackathon, Bell Hackathon, Quebec Hackathon
