@@ -1,4 +1,4 @@
-![Matthew Macri](assets/header.png)
+![Matthew Macri](assets/header.png?v=2)
 
 <h1 align="center">Hi, I'm Matthew Macri 👋</h1>
 
