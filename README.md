@@ -66,8 +66,8 @@
 ## 📊 GitHub Stats
 
 <p align="center">
-  <img height="165" src="https://github-readme-stats.vercel.app/api?username=MatthewMacri&show_icons=true&theme=tokyonight&hide_border=true" alt="GitHub stats">
-  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=MatthewMacri&layout=compact&theme=tokyonight&hide_border=true" alt="Top languages">
+  <img height="175" src="assets/github-stats.svg" alt="GitHub stats: stars earned, commits, pull requests, issues and public repositories">
+  <img height="175" src="assets/top-langs.svg" alt="Most used languages across my public repositories">
 </p>
 
 <p align="center">
