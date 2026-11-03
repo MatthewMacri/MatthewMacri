@@ -11,7 +11,11 @@ reader, and nothing can rate-limit or pause it.
   GITHUB_TOKEN=... python3 tools/make_stats_cards.py
 
 Writes assets/github-stats.svg, assets/top-langs.svg, and assets/stats.json,
-which holds the last figure successfully read for each stat.
+which holds the last figure successfully read for each stat. It also stamps
+each card's content hash onto its <img> in the README: GitHub serves README
+images through a cache keyed on the URL, so a card whose address never
+changes goes on being served from the old bytes however often the file
+behind it is rewritten.
 
 On the token: the Search API is what supplies the commit, pull request and
 issue counts, and Actions' built-in GITHUB_TOKEN cannot use it across
@@ -24,6 +28,7 @@ repository secret STATS_TOKEN; the workflow prefers it when it exists.
 """
 
 import collections
+import hashlib
 import json
 import os
 import re
@@ -287,6 +292,38 @@ def langs_card(totals, top=6):
     return s + "</svg>\n"
 
 
+README = os.path.join(os.path.dirname(OUT), "README.md")
+
+
+def stamp_readme():
+    """Point the README at each card by content hash.
+
+    GitHub proxies and caches README images, keyed on their URL. Rewriting
+    a card without changing its address leaves the old picture on the page
+    - which is how a card reading zeroes outlived the commit that fixed it.
+    A hash in the query string changes exactly when the picture does.
+    """
+    try:
+        with open(README, encoding="utf-8") as fh:
+            text = fh.read()
+    except OSError:
+        return
+    out = text
+    for name in ("github-stats.svg", "top-langs.svg"):
+        path = os.path.join(OUT, name)
+        try:
+            with open(path, "rb") as fh:
+                digest = hashlib.sha256(fh.read()).hexdigest()[:8]
+        except OSError:
+            continue
+        out = re.sub(r'src="assets/%s(\?h=[0-9a-f]+)?"' % re.escape(name),
+                     'src="assets/%s?h=%s"' % (name, digest), out)
+    if out != text:
+        with open(README, "w", encoding="utf-8") as fh:
+            fh.write(out)
+        print("stamped README with the new card hashes")
+
+
 def main():
     if not TOKEN:
         print("warning: no token, the API will rate-limit quickly",
@@ -353,6 +390,8 @@ def main():
         with open(os.path.join(OUT, filename), "w", encoding="utf-8") as fh:
             fh.write(svg)
         print("wrote assets/%s" % filename)
+
+    stamp_readme()
 
     keep = dict(known)
     keep.update({k: v for k, v in values.items() if v is not None})
