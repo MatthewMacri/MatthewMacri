@@ -67,7 +67,7 @@
 
 <p align="center">
   <img height="175" src="assets/github-stats.svg?h=991fa356" alt="GitHub stats: stars earned, commits, pull requests, issues and public repositories">
-  <img height="175" src="assets/top-langs.svg?h=b21ffb4b" alt="Most used languages across my public repositories">
+  <img height="175" src="assets/top-langs.svg?h=24a0e4f1" alt="Most used languages across my public repositories">
 </p>
 
 <p align="center">
