@@ -28,6 +28,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # a rebase needs history
 
       - uses: actions/setup-python@v5
         with:
@@ -54,4 +56,16 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add assets/github-stats.svg assets/top-langs.svg assets/stats.json
           git commit -m "chore: redraw stats cards"
-          git push
+
+          # Something may have landed on main since the checkout. These
+          # files are generated, so on a clash the freshly drawn one wins
+          # -- during a rebase that is "theirs", the commit being applied.
+          for attempt in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            echo "push rejected, rebasing onto main (attempt $attempt)"
+            git pull --rebase --strategy-option=theirs origin main
+          done
+          echo "could not push after three attempts" >&2
+          exit 1
