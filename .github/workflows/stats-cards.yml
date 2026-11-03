@@ -35,6 +35,12 @@ jobs:
 
       - name: Draw the cards
         env:
+          # The built-in GITHUB_TOKEN cannot use the Search API across
+          # repositories, so with it alone the commit, PR and issue counts
+          # come back 422 and the script reuses the last figures it read.
+          # Add a classic PAT with public_repo and read:user as the secret
+          # STATS_TOKEN to keep those three live.
+          STATS_TOKEN: ${{ secrets.STATS_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 tools/make_stats_cards.py
 
@@ -46,6 +52,6 @@ jobs:
           fi
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/github-stats.svg assets/top-langs.svg
+          git add assets/github-stats.svg assets/top-langs.svg assets/stats.json
           git commit -m "chore: redraw stats cards"
           git push

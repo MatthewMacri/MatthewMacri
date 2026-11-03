@@ -10,7 +10,17 @@ reader, and nothing can rate-limit or pause it.
 
   GITHUB_TOKEN=... python3 tools/make_stats_cards.py
 
-Writes assets/github-stats.svg and assets/top-langs.svg.
+Writes assets/github-stats.svg, assets/top-langs.svg, and assets/stats.json,
+which holds the last figure successfully read for each stat.
+
+On the token: the Search API is what supplies the commit, pull request and
+issue counts, and Actions' built-in GITHUB_TOKEN cannot use it across
+repositories - every such query comes back 422, and the same token returns
+a user object with no follower count. A run with only that token therefore
+knows the stars and the languages and nothing else. Rather than publish
+zeros it reuses the last figure it did read, from assets/stats.json. For
+live numbers, put a classic PAT with public_repo and read:user in the
+repository secret STATS_TOKEN; the workflow prefers it when it exists.
 """
 
 import collections
@@ -22,7 +32,8 @@ import urllib.error
 import urllib.request
 
 USER = os.environ.get("PROFILE_USER", "MatthewMacri")
-TOKEN = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+TOKEN = (os.environ.get("STATS_TOKEN") or os.environ.get("GITHUB_TOKEN")
+         or os.environ.get("GH_TOKEN"))
 OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets")
 
 # ---------------------------------------------------------------- palette
@@ -132,8 +143,30 @@ def language_bytes(repos):
 
 
 def count(query):
+    """Total matches, or None if the query could not be run at all.
+
+    The distinction matters: a failed query is not an achievement of zero,
+    and writing it onto the card as one would be a quiet lie.
+    """
     data, _ = api("search/issues?q=%s&per_page=1" % query)
-    return data.get("total_count", 0) if data else 0
+    if not data or "total_count" not in data:
+        return None
+    return data["total_count"]
+
+
+def load_known():
+    try:
+        with open(os.path.join(OUT, "stats.json"), encoding="utf-8") as fh:
+            return json.load(fh)
+    except (OSError, ValueError):
+        return {}
+
+
+def keep_best(fresh, known, key):
+    """Prefer a figure read just now; otherwise the last one that was."""
+    if fresh is not None:
+        return fresh, True
+    return known.get(key), False
 
 
 # ------------------------------------------------------------------ svg
@@ -256,24 +289,44 @@ def langs_card(totals, top=6):
 
 def main():
     if not TOKEN:
-        print("warning: no GITHUB_TOKEN, the API will rate-limit quickly",
+        print("warning: no token, the API will rate-limit quickly",
               file=sys.stderr)
+    known = load_known()
 
     print("fetching repositories...")
     repos = public_repos()
+    if not repos:
+        print("no repositories came back; refusing to overwrite the cards "
+              "with an empty one", file=sys.stderr)
+        return 1
     stars = sum(r.get("stargazers_count", 0) for r in repos)
     print("  %d public source repos, %d stars" % (len(repos), stars))
 
     user, _ = api("users/%s" % USER)
-    followers = user.get("followers", 0) if user else 0
-    name = (user.get("name") or USER) if user else USER
+    user = user or {}
+    name = user.get("name") or known.get("name") or USER
 
     commits, _ = api("search/commits?q=author:%s&per_page=1" % USER)
-    commits = commits.get("total_count", 0) if commits else 0
+    commits = commits.get("total_count") if commits else None
     prs = count("author:%s+type:pr" % USER)
     issues = count("author:%s+type:issue" % USER)
-    print("  %d commits, %d PRs, %d issues, %d followers"
-          % (commits, prs, issues, followers))
+
+    # Anything that could not be read falls back to the last figure that
+    # could. A card showing a slightly old number is honest; a card showing
+    # a zero because a request failed is not.
+    fresh = {"commits": commits, "prs": prs, "issues": issues}
+    values, stale = {}, []
+    for key, got in fresh.items():
+        value, is_fresh = keep_best(got, known, key)
+        values[key] = value
+        if not is_fresh and value is not None:
+            stale.append(key)
+    if stale:
+        print("  could not read %s; keeping the last known figures"
+              % ", ".join(sorted(stale)), file=sys.stderr)
+    print("  commits %s, PRs %s, issues %s"
+          % tuple(values[k] if values[k] is not None else "unknown"
+                  for k in ("commits", "prs", "issues")))
 
     print("reading file trees for language shares...")
     totals = language_bytes(repos)
@@ -281,20 +334,33 @@ def main():
         print("no language data; refusing to write an empty card",
               file=sys.stderr)
         return 1
-    print("  " + ", ".join("%s %.1f%%" % (k, 100 * v / sum(totals.values()))
+    grand = sum(totals.values())
+    print("  " + ", ".join("%s %.1f%%" % (k, 100 * v / grand)
                            for k, v in totals.most_common(6)))
 
+    # A row whose figure was never once obtained is left off rather than
+    # shown as nothing.
+    rows = [("Total Stars Earned", stars, "star"),
+            ("Total Commits", values["commits"], "commit"),
+            ("Total PRs", values["prs"], "pr"),
+            ("Total Issues", values["issues"], "issue"),
+            ("Public Repositories", len(repos), "repo")]
+    rows = [r for r in rows if r[1] is not None]
+
     os.makedirs(OUT, exist_ok=True)
-    stats = [("Total Stars Earned", stars, "star"),
-             ("Total Commits", commits, "commit"),
-             ("Total PRs", prs, "pr"),
-             ("Total Issues", issues, "issue"),
-             ("Public Repositories", len(repos), "repo")]
-    for filename, svg in (("github-stats.svg", stats_card(stats, name)),
+    for filename, svg in (("github-stats.svg", stats_card(rows, name)),
                           ("top-langs.svg", langs_card(totals))):
         with open(os.path.join(OUT, filename), "w", encoding="utf-8") as fh:
             fh.write(svg)
         print("wrote assets/%s" % filename)
+
+    keep = dict(known)
+    keep.update({k: v for k, v in values.items() if v is not None})
+    keep.update({"name": name, "stars": stars, "repos": len(repos)})
+    with open(os.path.join(OUT, "stats.json"), "w", encoding="utf-8") as fh:
+        json.dump(keep, fh, indent=2, sort_keys=True)
+        fh.write("\n")
+    print("wrote assets/stats.json")
     return 0
 
 
