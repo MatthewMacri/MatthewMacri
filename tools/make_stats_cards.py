@@ -233,7 +233,7 @@ def stats_card(stats, name):
                             for k, v, _ in stats))
     s += ('<text x="25" y="33" fill="%s" font-family="%s" font-size="16" '
           'font-weight="600">%s’s GitHub Stats</text>\n'
-          % (TITLE, FONT, USER))
+          % (TITLE, FONT, esc(name)))
     s += '<line x1="25" y1="45" x2="%d" y2="45" stroke="#2c3050"/>\n' % (w - 25)
 
     y = 72
@@ -341,7 +341,13 @@ def main():
 
     user, _ = api("users/%s" % USER)
     user = user or {}
-    name = user.get("name") or known.get("name") or USER
+    # Actions' built-in token gets a reduced user object whose name is just
+    # the login, so a scheduled run would quietly retitle the card from
+    # "Matthew Macri" to "MatthewMacri". A stored display name that differs
+    # from the login was read with a token that could see it, so it wins.
+    name = user.get("name") or USER
+    if name == USER and known.get("name"):
+        name = known["name"]
 
     commits, _ = api("search/commits?q=author:%s&per_page=1" % USER)
     commits = commits.get("total_count") if commits else None
