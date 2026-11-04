@@ -28,6 +28,7 @@ repository secret STATS_TOKEN; the workflow prefers it when it exists.
 """
 
 import collections
+import datetime
 import hashlib
 import json
 import os
@@ -292,7 +293,216 @@ def langs_card(totals, top=6):
     return s + "</svg>\n"
 
 
+# ------------------------------------------------------------- the streak
+
+CALENDAR_QUERY = """
+query($login: String!, $from: DateTime!, $to: DateTime!) {
+  user(login: $login) {
+    contributionsCollection(from: $from, to: $to) {
+      contributionCalendar {
+        weeks { contributionDays { date contributionCount } }
+      }
+    }
+  }
+}
+"""
+
+
+def graphql(query, variables):
+    body = json.dumps({"query": query, "variables": variables}).encode()
+    req = urllib.request.Request(
+        "https://api.github.com/graphql", data=body, headers={
+            "Content-Type": "application/json",
+            "User-Agent": "profile-stats-card",
+            **({"Authorization": "Bearer " + TOKEN} if TOKEN else {}),
+        })
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            payload = json.load(r)
+    except urllib.error.HTTPError as e:
+        print("  ! graphql -> HTTP %s" % e.code, file=sys.stderr)
+        return None
+    if payload.get("errors"):
+        print("  ! graphql -> %s" % payload["errors"][0].get("message"),
+              file=sys.stderr)
+        return None
+    return payload.get("data")
+
+
+def contribution_days(created):
+    """Every day the account has existed, as {date: count}.
+
+    The calendar can only be asked for a year at a time, so this walks one
+    year per request from the account's creation. A private contribution
+    graph reads as all-zero to anyone but its owner, so this needs a token
+    belonging to the account, carrying read:user. Actions' built-in token
+    is neither.
+    """
+    today = datetime.date.today()
+    start = datetime.date(created.year, created.month, created.day)
+    days, year = {}, start.year
+    while year <= today.year:
+        a = max(start, datetime.date(year, 1, 1))
+        b = min(today, datetime.date(year, 12, 31))
+        if a > b:
+            year += 1
+            continue
+        data = graphql(CALENDAR_QUERY, {
+            "login": USER,
+            "from": a.isoformat() + "T00:00:00Z",
+            "to": b.isoformat() + "T23:59:59Z",
+        })
+        if data is None:
+            return None
+        try:
+            weeks = (data["user"]["contributionsCollection"]
+                     ["contributionCalendar"]["weeks"])
+        except (KeyError, TypeError):
+            return None
+        for week in weeks:
+            for day in week["contributionDays"]:
+                date = datetime.date.fromisoformat(day["date"])
+                if start <= date <= today:
+                    days[date] = day["contributionCount"]
+        year += 1
+    return days
+
+
+def streaks(days):
+    """Total, current and longest run of consecutive contributing days."""
+    if not days:
+        return None
+    today = datetime.date.today()
+    total = sum(days.values())
+
+    longest = best = None
+    run_start = None
+    for date in sorted(days):
+        if days[date] > 0:
+            if run_start is None:
+                run_start = date
+            run = (date - run_start).days + 1
+            if best is None or run > best:
+                best, longest = run, (run_start, date)
+        else:
+            run_start = None
+
+    # A day with nothing on it yet does not break a streak until it is over,
+    # which is why today being empty counts as the streak still standing.
+    cursor = today
+    if days.get(today, 0) == 0:
+        cursor = today - datetime.timedelta(days=1)
+    current, current_end = 0, cursor
+    while days.get(cursor, 0) > 0:
+        current += 1
+        cursor -= datetime.timedelta(days=1)
+    current_start = cursor + datetime.timedelta(days=1)
+
+    return {
+        "streak_total": total,
+        "streak_current": current,
+        "streak_current_from": current_start.isoformat() if current else None,
+        "streak_current_to": current_end.isoformat() if current else None,
+        "streak_longest": best or 0,
+        "streak_longest_from": longest[0].isoformat() if longest else None,
+        "streak_longest_to": longest[1].isoformat() if longest else None,
+        "streak_first_day": min(days).isoformat(),
+        "streak_as_of": today.isoformat(),
+    }
+
+
+def pretty(iso, with_year=True):
+    if not iso:
+        return ""
+    d = datetime.date.fromisoformat(iso)
+    out = d.strftime("%b %-d")
+    return out + d.strftime(", %Y") if with_year else out
+
+
+def streak_card(st):
+    w, h = 495, 195
+    cols = w / 3.0
+    s = card_open(w, h, "Contribution streak",
+                  "%s contributions, current streak %s days, longest %s days"
+                  % (st["streak_total"], st["streak_current"],
+                     st["streak_longest"]))
+
+    for i in (1, 2):   # the two rules between the three columns
+        s += ('<line x1="%.1f" y1="30" x2="%.1f" y2="%d" stroke="#2c3050"/>\n'
+              % (cols * i, cols * i, h - 30))
+
+    def column(cx, big, label, under, highlight=False):
+        colour = ICON if highlight else TITLE
+        out = ('<text x="%.1f" y="78" fill="%s" font-family="%s" '
+               'font-size="28" font-weight="700" text-anchor="middle">%s'
+               '</text>\n' % (cx, colour, FONT, esc(big)))
+        out += ('<text x="%.1f" y="106" fill="%s" font-family="%s" '
+                'font-size="13" text-anchor="middle">%s</text>\n'
+                % (cx, TEXT, FONT, esc(label)))
+        out += ('<text x="%.1f" y="128" fill="%s" font-family="%s" '
+                'font-size="11" text-anchor="middle">%s</text>\n'
+                % (cx, MUTED, FONT, esc(under)))
+        return out
+
+    first = pretty(st.get("streak_first_day"))
+    s += column(cols * 0.5, group(st["streak_total"]), "Total Contributions",
+                "%s \u2013 Present" % first)
+
+    if st["streak_current"]:
+        span = "%s \u2013 %s" % (pretty(st["streak_current_from"], False),
+                                 pretty(st["streak_current_to"], False))
+    else:
+        span = "\u2014"
+    s += column(cols * 1.5, group(st["streak_current"]), "Current Streak",
+                span, highlight=True)
+
+    if st["streak_longest"]:
+        span = "%s \u2013 %s" % (pretty(st["streak_longest_from"], False),
+                                 pretty(st["streak_longest_to"], False))
+    else:
+        span = "\u2014"
+    s += column(cols * 2.5, group(st["streak_longest"]), "Longest Streak",
+                span)
+
+    # A streak is a claim about today. If the figures could not be refreshed
+    # today, the card says when they were, rather than implying otherwise.
+    if st.get("streak_as_of") != datetime.date.today().isoformat():
+        s += ('<text x="%d" y="%d" fill="%s" font-family="%s" font-size="10" '
+              'text-anchor="middle">as of %s</text>\n'
+              % (w // 2, h - 14, MUTED, FONT, pretty(st.get("streak_as_of"))))
+    return s + "</svg>\n"
+
+
 README = os.path.join(os.path.dirname(OUT), "README.md")
+
+
+STREAK_START = "<!-- streak-card:start -->"
+STREAK_END = "<!-- streak-card:end -->"
+
+
+def sync_streak_block(text):
+    """Show the streak card only while there is a real one to show.
+
+    The card depends on a token that can read this profile's contributions,
+    which the built-in one cannot. Rather than leave a broken image on the
+    page whenever that is missing, the README carries a slot that this
+    fills when the card exists and empties when it does not.
+    """
+    if STREAK_START not in text or STREAK_END not in text:
+        return text
+    path = os.path.join(OUT, "streak.svg")
+    if os.path.exists(path):
+        with open(path, "rb") as fh:
+            digest = hashlib.sha256(fh.read()).hexdigest()[:8]
+        body = ('\n<p align="center">\n'
+                '  <img height="175" src="assets/streak.svg?h=%s" '
+                'alt="Contribution streak: total contributions, current '
+                'streak and longest streak">\n</p>\n' % digest)
+    else:
+        body = "\n"
+    head = text[:text.index(STREAK_START) + len(STREAK_START)]
+    tail = text[text.index(STREAK_END):]
+    return head + body + tail
 
 
 def stamp_readme():
@@ -309,7 +519,7 @@ def stamp_readme():
     except OSError:
         return
     out = text
-    for name in ("github-stats.svg", "top-langs.svg"):
+    for name in ("github-stats.svg", "top-langs.svg", "streak.svg"):
         path = os.path.join(OUT, name)
         try:
             with open(path, "rb") as fh:
@@ -318,6 +528,7 @@ def stamp_readme():
             continue
         out = re.sub(r'src="assets/%s(\?h=[0-9a-f]+)?"' % re.escape(name),
                      'src="assets/%s?h=%s"' % (name, digest), out)
+    out = sync_streak_block(out)
     if out != text:
         with open(README, "w", encoding="utf-8") as fh:
             fh.write(out)
@@ -371,6 +582,38 @@ def main():
           % tuple(values[k] if values[k] is not None else "unknown"
                   for k in ("commits", "prs", "issues")))
 
+    print("reading the contribution calendar...")
+    created = user.get("created_at")
+    created = (datetime.datetime.strptime(created, "%Y-%m-%dT%H:%M:%SZ").date()
+               if created else datetime.date(2023, 1, 1))
+    days = contribution_days(created)
+    st = streaks(days) if days else None
+    if st and st["streak_total"] == 0:
+        # An all-zero calendar is what a private contribution graph looks
+        # like to a token that cannot see it, and an account with commits
+        # to its name has not really contributed nothing. Treat it as
+        # unreadable rather than as an answer - whether or not there are
+        # stored figures to fall back on, a zeroed streak card is worse
+        # than no streak card.
+        print("  calendar came back empty - this token cannot see the "
+              "profile's contributions", file=sys.stderr)
+        st = None
+    if st:
+        print("  %d contributions, current streak %d, longest %d"
+              % (st["streak_total"], st["streak_current"],
+                 st["streak_longest"]))
+    else:
+        st = {k: known[k] for k in known if k.startswith("streak_")}
+        if not st.get("streak_total"):
+            # Nothing real was ever stored either - draw no streak card at
+            # all rather than one asserting a person has done nothing.
+            st = {}
+            print("  no streak figures available; leaving that card out",
+                  file=sys.stderr)
+        else:
+            print("  keeping the streak figures from %s"
+                  % st.get("streak_as_of", "an earlier run"), file=sys.stderr)
+
     print("reading file trees for language shares...")
     totals = language_bytes(repos)
     if not totals:
@@ -391,8 +634,11 @@ def main():
     rows = [r for r in rows if r[1] is not None]
 
     os.makedirs(OUT, exist_ok=True)
-    for filename, svg in (("github-stats.svg", stats_card(rows, name)),
-                          ("top-langs.svg", langs_card(totals))):
+    cards = [("github-stats.svg", stats_card(rows, name)),
+             ("top-langs.svg", langs_card(totals))]
+    if st.get("streak_total") is not None:
+        cards.append(("streak.svg", streak_card(st)))
+    for filename, svg in cards:
         with open(os.path.join(OUT, filename), "w", encoding="utf-8") as fh:
             fh.write(svg)
         print("wrote assets/%s" % filename)
@@ -402,6 +648,7 @@ def main():
     keep = dict(known)
     keep.update({k: v for k, v in values.items() if v is not None})
     keep.update({"name": name, "stars": stars, "repos": len(repos)})
+    keep.update({k: v for k, v in st.items() if v is not None})
     with open(os.path.join(OUT, "stats.json"), "w", encoding="utf-8") as fh:
         json.dump(keep, fh, indent=2, sort_keys=True)
         fh.write("\n")

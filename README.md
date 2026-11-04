@@ -66,13 +66,12 @@
 ## 📊 GitHub Stats
 
 <p align="center">
-  <img height="175" src="assets/github-stats.svg?h=991fa356" alt="GitHub stats: stars earned, commits, pull requests, issues and public repositories">
+  <img height="175" src="assets/github-stats.svg?h=d04f31e9" alt="GitHub stats: stars earned, commits, pull requests, issues and public repositories">
   <img height="175" src="assets/top-langs.svg?h=24a0e4f1" alt="Most used languages across my public repositories">
 </p>
 
-<p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=MatthewMacri&theme=tokyonight&hide_border=true" alt="GitHub streak">
-</p>
+<!-- streak-card:start -->
+<!-- streak-card:end -->
 
 ---
 
