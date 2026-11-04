@@ -67,7 +67,7 @@
 
 <p align="center">
   <img height="175" src="assets/github-stats.svg?h=d04f31e9" alt="GitHub stats: stars earned, commits, pull requests, issues and public repositories">
-  <img height="175" src="assets/top-langs.svg?h=24a0e4f1" alt="Most used languages across my public repositories">
+  <img height="175" src="assets/top-langs.svg?h=9f3f7ded" alt="Most used languages across my public repositories">
 </p>
 
 <!-- streak-card:start -->
