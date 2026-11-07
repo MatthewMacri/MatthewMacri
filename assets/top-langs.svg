@@ -1,34 +1,34 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="360" height="195" viewBox="0 0 360 195" role="img" aria-labelledby="t d">
-<title id="t">Most used languages</title><desc id="d">PHP 18.5%, Dart 14.4%, Java 13.5%, CSS 11.7%, Python 11.4%, C# 7.6%</desc>
+<title id="t">Most used languages</title><desc id="d">PHP 18.2%, Dart 14.2%, Java 13.3%, CSS 11.5%, Python 11.3%, Monkey C 8.3%</desc>
 <rect x="0.5" y="0.5" width="359" height="194" rx="6" fill="#1a1b27" stroke="#2c3050"/>
 <text x="25" y="33" fill="#70a5fd" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600">Most Used Languages</text>
 <line x1="25" y1="45" x2="335" y2="45" stroke="#2c3050"/>
 <clipPath id="bar"><rect x="25" y="60" width="310" height="9" rx="4"/></clipPath>
 <g clip-path="url(#bar)">
-<rect x="25.00" y="60" width="57.99" height="9" fill="#4F5D95"/>
-<rect x="82.49" y="60" width="45.27" height="9" fill="#00B4AB"/>
-<rect x="127.26" y="60" width="42.39" height="9" fill="#b07219"/>
-<rect x="169.15" y="60" width="36.66" height="9" fill="#563d7c"/>
-<rect x="205.31" y="60" width="35.82" height="9" fill="#3572A5"/>
-<rect x="240.62" y="60" width="24.12" height="9" fill="#178600"/>
-<rect x="264.24" y="60" width="70.76" height="9" fill="#2c3050"/>
+<rect x="25.00" y="60" width="56.96" height="9" fill="#4F5D95"/>
+<rect x="81.46" y="60" width="44.46" height="9" fill="#00B4AB"/>
+<rect x="125.42" y="60" width="41.63" height="9" fill="#b07219"/>
+<rect x="166.56" y="60" width="36.01" height="9" fill="#563d7c"/>
+<rect x="202.07" y="60" width="35.47" height="9" fill="#3572A5"/>
+<rect x="237.03" y="60" width="26.16" height="9" fill="#8D6747"/>
+<rect x="262.69" y="60" width="72.31" height="9" fill="#2c3050"/>
 </g>
 <circle cx="30" cy="91" r="5" fill="#4F5D95"/>
 <text x="42" y="95" fill="#38bdad" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12">PHP</text>
-<text x="175" y="95" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">18.5%</text>
+<text x="175" y="95" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">18.2%</text>
 <circle cx="195" cy="91" r="5" fill="#00B4AB"/>
 <text x="207" y="95" fill="#38bdad" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12">Dart</text>
-<text x="340" y="95" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">14.4%</text>
+<text x="340" y="95" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">14.2%</text>
 <circle cx="30" cy="115" r="5" fill="#b07219"/>
 <text x="42" y="119" fill="#38bdad" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12">Java</text>
-<text x="175" y="119" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">13.5%</text>
+<text x="175" y="119" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">13.3%</text>
 <circle cx="195" cy="115" r="5" fill="#563d7c"/>
 <text x="207" y="119" fill="#38bdad" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12">CSS</text>
-<text x="340" y="119" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">11.7%</text>
+<text x="340" y="119" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">11.5%</text>
 <circle cx="30" cy="139" r="5" fill="#3572A5"/>
 <text x="42" y="143" fill="#38bdad" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12">Python</text>
-<text x="175" y="143" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">11.4%</text>
-<circle cx="195" cy="139" r="5" fill="#178600"/>
-<text x="207" y="143" fill="#38bdad" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12">C#</text>
-<text x="340" y="143" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">7.6%</text>
+<text x="175" y="143" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">11.3%</text>
+<circle cx="195" cy="139" r="5" fill="#8D6747"/>
+<text x="207" y="143" fill="#38bdad" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12">Monkey C</text>
+<text x="340" y="143" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">8.3%</text>
 </svg>
