@@ -66,13 +66,13 @@
 ## 📊 GitHub Stats
 
 <p align="center">
-  <img height="175" src="assets/github-stats.svg?h=34ae0c23" alt="GitHub stats: stars earned, commits, pull requests, issues and public repositories">
-  <img height="175" src="assets/top-langs.svg?h=022027d4" alt="Most used languages across my public repositories">
+  <img height="175" src="assets/github-stats.svg?h=72213573" alt="GitHub stats: stars earned, commits, pull requests, issues and public repositories">
+  <img height="175" src="assets/top-langs.svg?h=f53695aa" alt="Most used languages across my public repositories">
 </p>
 
 <!-- streak-card:start -->
 <p align="center">
-  <img height="175" src="assets/streak.svg?h=56056b13" alt="Contribution streak: total contributions, current streak and longest streak">
+  <img height="175" src="assets/streak.svg?h=a08ee758" alt="Contribution streak: total contributions, current streak and longest streak">
 </p>
 <!-- streak-card:end -->
 
