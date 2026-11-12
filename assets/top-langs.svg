@@ -1,24 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="360" height="195" viewBox="0 0 360 195" role="img" aria-labelledby="t d">
-<title id="t">Most used languages</title><desc id="d">PHP 17.1%, Dart 13.3%, Python 12.8%, Java 12.4%, Monkey C 11.6%, CSS 10.7%</desc>
+<title id="t">Most used languages</title><desc id="d">PHP 17.0%, Dart 13.2%, Python 12.8%, Java 12.4%, Monkey C 11.9%, CSS 10.7%</desc>
 <rect x="0.5" y="0.5" width="359" height="194" rx="6" fill="#1a1b27" stroke="#2c3050"/>
 <text x="25" y="33" fill="#70a5fd" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="16" font-weight="600">Most Used Languages</text>
 <line x1="25" y1="45" x2="335" y2="45" stroke="#2c3050"/>
 <clipPath id="bar"><rect x="25" y="60" width="310" height="9" rx="4"/></clipPath>
 <g clip-path="url(#bar)">
-<rect x="25.00" y="60" width="53.39" height="9" fill="#4F5D95"/>
-<rect x="77.89" y="60" width="41.68" height="9" fill="#00B4AB"/>
-<rect x="119.06" y="60" width="40.31" height="9" fill="#3572A5"/>
-<rect x="158.87" y="60" width="39.03" height="9" fill="#b07219"/>
-<rect x="197.40" y="60" width="36.61" height="9" fill="#8D6747"/>
-<rect x="233.51" y="60" width="33.76" height="9" fill="#563d7c"/>
-<rect x="266.77" y="60" width="68.23" height="9" fill="#2c3050"/>
+<rect x="25.00" y="60" width="53.24" height="9" fill="#4F5D95"/>
+<rect x="77.74" y="60" width="41.56" height="9" fill="#00B4AB"/>
+<rect x="118.80" y="60" width="40.20" height="9" fill="#3572A5"/>
+<rect x="158.50" y="60" width="38.92" height="9" fill="#b07219"/>
+<rect x="196.91" y="60" width="37.38" height="9" fill="#8D6747"/>
+<rect x="233.79" y="60" width="33.67" height="9" fill="#563d7c"/>
+<rect x="266.96" y="60" width="68.04" height="9" fill="#2c3050"/>
 </g>
 <circle cx="30" cy="91" r="5" fill="#4F5D95"/>
 <text x="42" y="95" fill="#38bdad" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12">PHP</text>
-<text x="175" y="95" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">17.1%</text>
+<text x="175" y="95" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">17.0%</text>
 <circle cx="195" cy="91" r="5" fill="#00B4AB"/>
 <text x="207" y="95" fill="#38bdad" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12">Dart</text>
-<text x="340" y="95" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">13.3%</text>
+<text x="340" y="95" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">13.2%</text>
 <circle cx="30" cy="115" r="5" fill="#3572A5"/>
 <text x="42" y="119" fill="#38bdad" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12">Python</text>
 <text x="175" y="119" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">12.8%</text>
@@ -27,7 +27,7 @@
 <text x="340" y="119" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">12.4%</text>
 <circle cx="30" cy="139" r="5" fill="#8D6747"/>
 <text x="42" y="143" fill="#38bdad" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12">Monkey C</text>
-<text x="175" y="143" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">11.6%</text>
+<text x="175" y="143" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">11.9%</text>
 <circle cx="195" cy="139" r="5" fill="#563d7c"/>
 <text x="207" y="143" fill="#38bdad" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12">CSS</text>
 <text x="340" y="143" fill="#8a92b2" font-family="'Segoe UI', Ubuntu, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12" text-anchor="end">10.7%</text>
