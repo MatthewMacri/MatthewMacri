@@ -72,7 +72,7 @@
 
 <!-- streak-card:start -->
 <p align="center">
-  <img height="175" src="assets/streak.svg?h=8bec9f6b" alt="Contribution streak: total contributions, current streak and longest streak">
+  <img height="175" src="assets/streak.svg?h=ca04b83d" alt="Contribution streak: total contributions, current streak and longest streak">
 </p>
 <!-- streak-card:end -->
 
